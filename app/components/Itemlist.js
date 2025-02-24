@@ -6,7 +6,7 @@ import styles from "../page.module.css";
 function Itemlist() {
     // Define state for input, message, and error
     const [input, setInput] = useState('');
-    const [message, setMessage] = useState([]);
+    const [items, setItems] = useState([]);
     const [error, setError] = useState('');
 
     // Function triggered when the user submits the form
@@ -17,9 +17,8 @@ function Itemlist() {
         //Check user input
         if (input.trim() === '') {
             setError('Item cannot be empty!');
-            setMessage('');
         } else {
-            setMessage(prev => [`"${input}" was added to your list!`, ...prev]);
+            setItems(prev => [...prev, input]);
             setError('')
             setInput('');
         }
@@ -30,13 +29,23 @@ function Itemlist() {
         setInput(event.target.value);
     };
 
+    //deleyes an item when clicked delete button
+    const handleDelete = (index) => {
+        //makes new list without the item at the clicked position and make a new list without the item a the clicked position
+        const updatedItems = items.filter((_, i) => i !== index);
+        //update list 
+        setItems(updatedItems);
+
+    };
+
     return (
         <div className={styles.background}>
             <div className={styles.addItemPage}>
 
+                {/* Heading */}
+                <h1>Item List</h1>
+
                 <div className={styles.card2}>
-                    {/* Heading */}
-                    <h1>Item List</h1>
 
                     {/* Form to add a new item  */}
                     <form onSubmit={handleSubmit}>
@@ -47,11 +56,16 @@ function Itemlist() {
                     {/* Display error message */}
                     {error && <div>{error}</div>}
 
-                    {/* Display item, using map to iterate through the array */}
-                    {message && <div>{message.map((msg, index) => (
-                        <div key={index} className={styles.listItem}>{msg}</div>
-                    ))}</div>}
-
+                    {/* Create new array using map  */}
+                    {/* Display and call the function"  */}
+                    {items.length > 0 &&
+                        items.map((item, index) => (
+                            <div key={index} className={styles.listItem}  >
+                                <span>{item}</span>
+                                <button className={styles.deleteButton} onClick={() => handleDelete(index)}>Delete</button>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div >
