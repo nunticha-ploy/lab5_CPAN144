@@ -38,6 +38,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 10%;
+  margin-bottom: 10px;
 }
 
 .inputField {
@@ -124,4 +125,19 @@
   line-height: 27px;
   color: #242F40;
 
+}
+
+.text {
+  font-family: 'Arial Rounded MT Bold';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 27px;
+  color: #053046;
+  margin-left: 10px;
+}
+
+.checkBox {
+  accent-color: #053046;
+  cursor: pointer;
 }

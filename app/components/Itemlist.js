@@ -6,7 +6,7 @@ import styles from "../page.module.css";
 function Itemlist() {
     // Define state for input, message, and error
     const [input, setInput] = useState('');
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(['Apple', 'Banana', 'Grape']);
     const [error, setError] = useState('');
     const [showAOnly, setShowAOnly] = useState(false);
 
@@ -75,11 +75,12 @@ function Itemlist() {
                 {/* Display filter check box */}
                 <div>
                     <input
+                    className={styles.checkBox}
                         type="checkbox"
                         checked={showAOnly}
                         onChange={() => setShowAOnly(prev => !prev)}
                     />
-                    <label>Show Only Items Starting with A</label>
+                    <label className={styles.text}>Show Only Items Starting with A</label>
 
                 </div>
             </div>
