@@ -8,6 +8,7 @@ function Itemlist() {
     const [input, setInput] = useState('');
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
+    const [showAOnly, setShowAOnly] = useState(false);
 
     // Function triggered when the user submits the form
     const handleSubmit = (event) => {
@@ -29,7 +30,7 @@ function Itemlist() {
         setInput(event.target.value);
     };
 
-    //deleyes an item when clicked delete button
+    //deletes an item when clicked delete button
     const handleDelete = (index) => {
         //makes new list without the item at the clicked position and make a new list without the item a the clicked position
         const updatedItems = items.filter((_, i) => i !== index);
@@ -37,6 +38,10 @@ function Itemlist() {
         setItems(updatedItems);
 
     };
+
+    //filter show item start with A when clicked 
+    const filterItems = showAOnly
+        ? items.filter(item => item.charAt(0).toLowerCase() === 'a') : items;
 
     return (
         <div className={styles.background}>
@@ -59,13 +64,23 @@ function Itemlist() {
                     {/* Create new array using map  */}
                     {/* Display and call the function"  */}
                     {items.length > 0 &&
-                        items.map((item, index) => (
+                        filterItems.map((item, index) => (
                             <div key={index} className={styles.listItem}  >
                                 <span>{item}</span>
                                 <button className={styles.deleteButton} onClick={() => handleDelete(index)}>Delete</button>
                             </div>
                         ))
                     }
+                </div>
+                {/* Display filter check box */}
+                <div>
+                    <input
+                        type="checkbox"
+                        checked={showAOnly}
+                        onChange={() => setShowAOnly(prev => !prev)}
+                    />
+                    <label>Show Only Items Starting with A</label>
+
                 </div>
             </div>
         </div >
